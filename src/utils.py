@@ -17,6 +17,11 @@ PATCHED_DRIVER_PATH = None
 def get_config_log_html() -> bool:
     return os.environ.get('LOG_HTML', 'false').lower() == 'true'
 
+def get_config_save_page_on_failed_validation() -> bool:
+    return os.environ.get('SAVE_PAGE_ON_FAILED_VALIDATION', 'false').lower() == 'true'
+
+def get_config_save_page_on_failed_validation_path() -> str:
+    return os.environ.get('SAVE_PAGE_ON_FAILED_VALIDATION_PATH', '/app')
 
 def get_config_headless() -> bool:
     return os.environ.get('HEADLESS', 'true').lower() == 'true'

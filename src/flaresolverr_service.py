@@ -287,9 +287,12 @@ def _evil_logic(req: V1RequestBase, driver: WebDriver, method: str) -> Challenge
 
             except TimeoutException:
                 logging.debug("Timeout waiting for selector")
-                driver.save_screenshot(f"/app/challenge_" + str(attempt) + ".png")
-                with open(f"/app/challenge_" + str(attempt) + ".html", 'w') as f:
-                    f.write(driver.page_source)
+
+                if utils.get_config_save_page_on_failed_validation():
+                    save_path = utils.get_config_save_page_on_failed_validation_path()
+                    driver.save_screenshot(save_path + "/challenge_" + str(attempt) + ".png")
+                    with open(save_path + "/challenge_" + str(attempt) + ".html", 'w') as f:
+                        f.write(driver.page_source)
 
                 click_verify(driver)
 
